@@ -35,7 +35,11 @@ const ShoeCard = ({
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
-          <Image alt="" src={imageSrc} />
+          {variant === 'new-release' && (
+            <NewReleaseLabel>New Release</NewReleaseLabel>
+          )}
+          {variant === 'on-sale' && <OnSaleLabel>Sale</OnSaleLabel>}
+          <Image alt='' src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
@@ -57,6 +61,27 @@ const Link = styled.a`
 
 const Wrapper = styled.article``;
 
+const BaseLabel = styled.div`
+  position: absolute;
+  top: 3.24%;
+  right: 0;
+  margin-right: -4px;
+  width: fit-content;
+  z-index: 2;
+  border-radius: 2px;
+  font-size: ${14 / 16}rem;
+  padding: 4px 8px;
+  color: ${COLORS.white};
+`;
+
+const NewReleaseLabel = styled(BaseLabel)`
+  background-color: ${COLORS.secondary};
+`;
+
+const OnSaleLabel = styled(BaseLabel)`
+  background-color: ${COLORS.primary};
+`;
+
 const ImageWrapper = styled.div`
   position: relative;
 `;
@@ -65,6 +90,8 @@ const Image = styled.img``;
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Name = styled.h3`
